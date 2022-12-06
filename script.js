@@ -7,7 +7,7 @@ addBtn.addEventListener('click', function getValue (ev) {
     if(userTask === '') {
         return; 
     } else {
-        
+        //TODO: use/check localStorage
         displayTask(userTask);
     }
 
@@ -35,8 +35,9 @@ function displayTask(task) {
     li.appendChild(deleteBtn);
     uList.appendChild(li);
     
-    doneTask(doneBtn);
-     //deleteTask(deleteBtn);
+    // TODO: Add validation for done task 
+    // doneTask(doneBtn);
+    // deleteTask(deleteBtn);
 
 }
 
@@ -55,11 +56,8 @@ function deleteTask(deleteBtn) {
 
 function doneTask(doneBtn) {
     doneBtn.addEventListener('click', function (ev) {
-        
         const doneTasks = document.querySelector('.done-content')
-
         doneTasks.innerText = ev.target.previousSibling.wholeText;
-        
         
     })
 
