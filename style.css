@@ -1,8 +1,17 @@
 
 
-
 .content ul li {
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
 }
+
+
+.done-task {
+    text-decoration: line-through;
+}
+
+.done-task .done {
+    display: none;
+}
+
