@@ -3,7 +3,9 @@ const content = document.querySelector('.content');
 let tasks = [];
 
 addBtn.addEventListener('click', function getValue (ev) {
+
     ev.preventDefault();
+
     const userTask = document.querySelector('input').value;
     if(userTask === '') {
         return; 
@@ -11,13 +13,7 @@ addBtn.addEventListener('click', function getValue (ev) {
         //TODO: use/check localStorage
     
         // task object
-        const userTodo = {
-            id: Date.now(),
-            taskName: userTask,
-            taskStatus: false
-        }
-    
-        tasks.push(userTodo);
+        tasks.push(userTask);
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
         
@@ -28,31 +24,37 @@ addBtn.addEventListener('click', function getValue (ev) {
 })
 
 function renderTask(tasks) {
-
-    // li element for ul
-    const li = document.createElement('li');
-    
-    // done button element for li
-    const doneBtn = document.createElement('button');
-    doneBtn.classList.add('done');
-    doneBtn.innerText = 'Done';
-    
-    // delete task button element for li
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete');
-    deleteBtn.innerText = 'Delete';
-    li.appendChild(doneBtn);
-       
+     
+  
     // get ul from content class
     const uList = document.querySelector('.content ul');
-    for (let i = 0; i < tasks.length; i++) {
-        li.append(tasks[i].taskName);
-    }
-    li.appendChild(deleteBtn);
-    uList.append(li);
     
-    doneTask(doneBtn);
-    deleteTask(deleteBtn);
+    //refresh/clear list content
+    uList.innerHTML = '';
+    
+    for (let i = 0; i < tasks.length; i++) {
+        // li element for ul
+        const li = document.createElement('li');
+        // done button element for li
+        const doneBtn = document.createElement('button');
+        doneBtn.classList.add('done');
+        doneBtn.innerText = 'Done';
+
+        // delete task button element for li
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete');
+        deleteBtn.innerText = 'Delete';
+        li.appendChild(doneBtn);
+        
+        li.appendChild(doneBtn);
+        li.append(tasks[i]);
+        li.appendChild(deleteBtn);
+        uList.append(li);
+    }
+    
+    
+    // doneTask(doneBtn);
+    // deleteTask(deleteBtn);
 
 }
 
@@ -60,9 +62,9 @@ function getFromLocalStorage() {
     const reference = localStorage.getItem('tasks');
     // if reference exists
     if (reference) {
-      // converts back to array and store it in todos array
-      todos = JSON.parse(reference);
-      renderTask(todos);
+        // converts back to array and store it in todos array
+        tasks = JSON.parse(reference);
+        renderTask(tasks);
     }
   }
   // initially get everything from localStorage
