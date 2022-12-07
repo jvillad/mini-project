@@ -43,7 +43,6 @@ function renderTask(tasks) {
     deleteBtn.innerText = 'Delete';
     li.appendChild(doneBtn);
        
-
     // get ul from content class
     const uList = document.querySelector('.content ul');
     for (let i = 0; i < tasks.length; i++) {
