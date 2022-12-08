@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>Todo:dle</title>
 </head>
 <body>
-    <h1>Daily To Do List</h1>
-    <div>
-        <input type="text" placeholder="enter task here" />
-        <button class="add-btn" type="submit">Add</button>
-    </div>
-    <div class="content">
-        <ul class="task-list">
-        </ul>
+    <h1>Todo:dle</h1>
+    <div class="container">
+        <div class="input-and-btn">
+            <input type="text" placeholder="enter task here" class="the-task"/>
+            <button type="submit" class="add-btn"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="content">
+            <ul class="task-list">
+            </ul>
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>

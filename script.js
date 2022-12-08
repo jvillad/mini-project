@@ -1,16 +1,26 @@
 "use strict"
-
 let tasks = [];
 const addBtn = document.querySelector('.add-btn')
 const content = document.querySelector('.content');
-
 // get ul from content class
 const uList = document.querySelector('.content ul');
 
+// function responsible for getting the data from local storage
+function init() {
+    const reference = localStorage.getItem('tasks');
+    // validation to check if there's a reference
+    if (reference) {
+        // converts back to array 
+        tasks = JSON.parse(reference);
+        renderOfTask(tasks);
+    }
+  }
+
+// initially get everything from localStorage
+init();
+
 addBtn.addEventListener('click', function getValue (ev) {
-
     ev.preventDefault();
-
     const userTask = document.querySelector('input').value;
     if(userTask === '') {
         return; 
@@ -24,11 +34,13 @@ addBtn.addEventListener('click', function getValue (ev) {
         tasks.push(task);
 
         setToLocalStorage(tasks);
+        // clear input 
         document.querySelector('input').value = '';
     }
 
 })
 
+// function to display content, add attributes and element to ul
 function renderOfTask(tasks) {
      
     //refresh/clear list content
@@ -41,11 +53,13 @@ function renderOfTask(tasks) {
         const doneBtn = document.createElement('button');
         // adding a class="done" for done button
         doneBtn.classList.add('done');
-        doneBtn.innerText = 'Done';
-        // add button to li
+        // doneBtn.innerText = 'Done';
+        //test below
+        doneBtn.innerHTML = `<span class="fa-solid fa-check"></span>`;
+        // add done button to li
         li.appendChild(doneBtn);
 
-        // data
+        // li setting attribute 'name' = 'value'
         li.setAttribute('data-id', tasks[i].id);
         li.setAttribute('class', tasks[i].status)
         li.append(tasks[i].theTask);
@@ -53,52 +67,61 @@ function renderOfTask(tasks) {
         // delete task button element for li
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete');
-        deleteBtn.innerHTML = `<i class="fa-solid fa-trash"></span>`
+        deleteBtn.innerHTML = `<span class="fa-solid fa-trash"></span>`
+        // add delete button to li
         li.appendChild(deleteBtn);
 
+        // append all li settings to ul
         uList.append(li);
     }
     
 }
 
+// a handler responsible for the done and delete button
 uList.addEventListener('click', function(ev) {
     
+    // if delete button is clicked
     if(ev.target.className === 'fa-solid fa-trash') {
         // get task id
         const dataKey =  ev.target.parentElement.parentElement.getAttribute('data-id')
-
-        tasks = tasks.filter(function(item) {
-            return String(item.id) !== dataKey;
-        });
-        //make a function
-        setToLocalStorage(tasks);
-    }
-    else if (ev.target.className === 'delete') {
+        deleteTask(dataKey);
+    } else if (ev.target.className === 'delete') { // guard validation
          // get task id
          const dataKey =  ev.target.parentElement.getAttribute('data-id')
-
-         tasks = tasks.filter(function(item) {
-             return String(item.id) !== dataKey;
-         });
-         //make a function
-         setToLocalStorage(tasks);
+         deleteTask(dataKey);
     }
-    console.log(ev.target.className)
-    if (ev.target.className === "done") {
+    
+    // if done button is clicked
+    if (ev.target.className === "fa-solid fa-check") {
+        const dataKey =  ev.target.parentElement.parentElement.getAttribute('data-id')
+        doneTask(dataKey);
+    } else if (ev.target.className === 'done') { // guard validation
+        // get task id
         const dataKey =  ev.target.parentElement.getAttribute('data-id')
-
-        tasks = tasks.map(object => {
-            if (String(object.id) === dataKey) {
-              
-              return {...object, status: 'done-task'};
-            }
-            return object;
-        });
-        setToLocalStorage(tasks);
+        doneTask(dataKey);
     }
+   
     
 })
 
+function deleteTask(dataId) {
+    tasks = tasks.filter(function(item) {
+        return String(item.id) !== dataId;
+    });
+    //make a function
+    setToLocalStorage(tasks);
+}
+
+function doneTask(dataId) {
+    tasks = tasks.map(object => {
+        if (String(object.id) === dataId) {
+          
+          return {...object, status: 'done-task'};
+        }
+        return object;
+    });
+    setToLocalStorage(tasks);
+}
 
 // helper function to push item to local storage and then re-render task to content
 function setToLocalStorage(tasks) {
@@ -106,36 +129,7 @@ function setToLocalStorage(tasks) {
     renderOfTask(tasks);
 }
 
-// handles the status change to done
-function doneTask(uList) {
-    uList.addEventListener('click', function (ev) {
 
-        const dataKey =  ev.target.parentElement.getAttribute('data-id');
-        tasks = tasks.map(object => {
-            if (String(object.id) === dataKey) {
-              
-              return {...object, status: 'done-task'};
-            }
-            return object;
-        });
-        setToLocalStorage(tasks);
-    })
-
-}
-
-// function responsible for getting the data from local storage
-function getDataFromLocalStorage() {
-    const reference = localStorage.getItem('tasks');
-    // validation to check if there's a reference
-    if (reference) {
-        // converts back to array 
-        tasks = JSON.parse(reference);
-        renderOfTask(tasks);
-    }
-  }
-
-// initially get everything from localStorage
-getDataFromLocalStorage();
 
 
 
