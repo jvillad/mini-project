@@ -53,9 +53,9 @@ function renderOfTask(tasks) {
         const doneBtn = document.createElement('button');
         // adding a class="done" for done button
         doneBtn.classList.add('done');
-        // doneBtn.innerText = 'Done';
+        doneBtn.innerText = 'Done';
         //test below
-        doneBtn.innerHTML = `<span class="fa-solid fa-check"></span>`;
+        // doneBtn.innerHTML = `<span class="fa-solid fa-check"></span>`;
         // add done button to li
         li.appendChild(doneBtn);
 
@@ -92,14 +92,15 @@ uList.addEventListener('click', function(ev) {
     }
     
     // if done button is clicked
-    if (ev.target.className === "fa-solid fa-check") {
-        const dataKey =  ev.target.parentElement.parentElement.getAttribute('data-id')
-        doneTask(dataKey);
-    } else if (ev.target.className === 'done') { // guard validation
-        // get task id
+    if (ev.target.className === "done") {
         const dataKey =  ev.target.parentElement.getAttribute('data-id')
         doneTask(dataKey);
     }
+    // } else if (ev.target.className === 'done') { // guard validation
+    //     // get task id
+    //     const dataKey =  ev.target.parentElement.getAttribute('data-id')
+    //     doneTask(dataKey);
+    // }
    
     
 })

@@ -1,5 +1,17 @@
 :root {
     --black: #0a0a0a;
+    --secondblack: #171321;
+    --hotmag: #ff17e4;
+    --cream: #F1F7ED;
+    --yellow: #faa916;
+    --maroon: #B33951;
+    --red: #EB5160;
+    --grey: #5b5a5d;
+    --green: #00FF00;
+    --font-size: 1.3rem;
+    --space: 'Space Mono', monospace;
+    --roboto: 'Roboto', sans-serif;
+    --poppins: 'Poppins', sans-serif;
 }
 
 * {
@@ -8,16 +20,23 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: var(--secondblack);
+    color: var(--cream);
+}
+
 h1 {
     padding-top: 150px;
-    text-align: center;
     margin: 0 auto;
+    padding-bottom: 50px;
 }
 
 .container {
     margin: 0 auto;
     max-width: 1200px;
+    text-align: center;
 }
+
 .input-and-btn{
     display: flex;
     justify-content: center;
@@ -27,34 +46,66 @@ h1 {
 
 .the-task {
     width: 400px;
-    height: 30px;
+    height: 40px;
     font-size: 18px;
-    border: 2px solid #0a0a0a;
-    padding: 5px;
+    border: none;
+    padding-left: 10px;
     border-radius: 5px;
 }
 
 .add-btn {
     width: 50px;
-    height: 30px;
-    border-radius: 5px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: var(--yellow);
+    font-size: 30px;
+    background-color: var(--secondblack);
 }
 
-.content ul li {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 50px;
-    justify-content: center;
-    padding-top: 20px;
-    font-size: 32px;
+.add-btn:hover{
+    cursor: pointer;
+    color: var(--red);
 }
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    
+    padding: 100px;
+    
+}
+
+ul li {
+    padding: 20px;
+    font-size: 32px;
+    list-style-type: none;
+    border: 5px solid var(--secondblack);
+    background: radial-gradient(circle, rgba(10,10,10,0.7651654411764706) 53%, rgba(23,19,33,0.9724483543417367) 91%);
+    text-align: left;
+    font-size: 20px;
+    line-height: 2;
+    vertical-align: bottom;
+   
+}
+
 
 .done {
-    border-radius: 50%;
-    width: 40px;
+    width: 80px;
     height: 40px;
-    border: none;
+    border-radius: 30px;
+    border: 1px solid var(--green);
+    color: var(--cream);
+    font-size: 20px;
+    background-color: var(--secondblack);
+    float: left;
+    margin-right: 50px;
     
+}
+
+.done:hover{
+    cursor: pointer;
+    color: var(--green);
 }
 
 
@@ -63,10 +114,20 @@ h1 {
     width: 40px;
     height: 40px;
     border: none;
+    background-color: var(--secondblack);
+    color: var(--cream);
+    float: right;
+    font-size: 25px;
+}
+
+.delete:hover{
+    cursor: pointer;
+    color: var(--red);
 }
 
 .done-task {
     text-decoration: line-through;
+    color: var(--grey);
 }
 
 .done-task .done {
