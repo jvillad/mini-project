@@ -1,4 +1,4 @@
-### Todo List
+# Todo List
 
 <p> Made this to practice and test my knowledge in Vanilla JavaScript, HTML and CSS.</p>
 <p> Nothing fancy, just a simple to do web app 😇 . Also, enjoyed making it and will probably add more features to this</b>
