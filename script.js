@@ -79,30 +79,17 @@ function renderOfTask(tasks) {
 
 // a handler responsible for the done and delete button
 uList.addEventListener('click', function(ev) {
-    
     // if delete button is clicked
     if(ev.target.className === 'fa-solid fa-trash') {
         // get task id
-        const dataKey =  ev.target.parentElement.parentElement.getAttribute('data-id')
-        deleteTask(dataKey);
-    } else if (ev.target.className === 'delete') { // guard validation
-         // get task id
-         const dataKey =  ev.target.parentElement.getAttribute('data-id')
-         deleteTask(dataKey);
-    }
-    
+        const dataId = ev.target.closest('li').getAttribute('data-id');
+        deleteTask(dataId);
+    } 
     // if done button is clicked
     if (ev.target.className === "done") {
-        const dataKey =  ev.target.parentElement.getAttribute('data-id')
-        doneTask(dataKey);
+        const dataId =  ev.target.closest('li').getAttribute('data-id')
+        doneTask(dataId);
     }
-    // } else if (ev.target.className === 'done') { // guard validation
-    //     // get task id
-    //     const dataKey =  ev.target.parentElement.getAttribute('data-id')
-    //     doneTask(dataKey);
-    // }
-   
-    
 })
 
 function deleteTask(dataId) {
@@ -129,9 +116,3 @@ function setToLocalStorage(tasks) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderOfTask(tasks);
 }
-
-
-
-
-
-
