@@ -4,7 +4,7 @@ const addBtn = document.querySelector('.add-btn')
 const content = document.querySelector('.content');
 // get ul from content class
 const uList = document.querySelector('.content ul');
-
+const userTask = document.querySelector('input');
 // function responsible for getting the data from local storage
 function init() {
     const reference = localStorage.getItem('tasks');
@@ -19,16 +19,35 @@ function init() {
 // initially get everything from localStorage
 init();
 
-addBtn.addEventListener('click', function getValue (ev) {
+
+userTask.addEventListener('keypress', (ev) => {
+
+    if (ev.key === 'Enter') {
+
+        ev.preventDefault();
+
+        handleTask()
+    }
+
+})
+
+addBtn.addEventListener('click',  (ev) => {
+
     ev.preventDefault();
-    const userTask = document.querySelector('input').value;
-    if(userTask === '') {
+
+    handleTask();
+
+})
+
+function handleTask () {
+
+    if(userTask.value === '') {
         return; 
     } else {
         // task object
         const task = {
             id: Date.now(), //to be used as a 'key' 
-            theTask: userTask, //user task
+            theTask: userTask.value, //user task
             status: "not-done" //status of the task
         }
         tasks.push(task);
@@ -37,8 +56,7 @@ addBtn.addEventListener('click', function getValue (ev) {
         // clear input 
         document.querySelector('input').value = '';
     }
-
-})
+}
 
 // function to display content, add attributes and element to ul
 function renderOfTask(tasks) {
@@ -54,8 +72,6 @@ function renderOfTask(tasks) {
         // adding a class="done" for done button
         doneBtn.classList.add('done');
         doneBtn.innerText = 'Done';
-        //test below
-        // doneBtn.innerHTML = `<span class="fa-solid fa-check"></span>`;
         // add done button to li
         li.appendChild(doneBtn);
 
