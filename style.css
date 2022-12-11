@@ -29,28 +29,36 @@ h1 {
     padding-top: 150px;
     margin: 0 auto;
     padding-bottom: 50px;
+    font-family: var(--space);
+}
+
+h1 .brand {
+    color: var(--yellow);
 }
 
 .container {
     margin: 0 auto;
     max-width: 1200px;
     text-align: center;
+    font-family: var(--poppins);
 }
 
 .input-and-btn{
     display: flex;
     justify-content: center;
     gap: 15px;
+    
   
 }
 
 .the-task {
-    width: 400px;
+    width: 600px;
     height: 40px;
     font-size: 18px;
     border: none;
     padding-left: 10px;
     border-radius: 5px;
+    font-family: var(--roboto);
 }
 
 .add-btn {
@@ -110,14 +118,16 @@ ul li {
 
 
 .delete {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    /* border-radius: 50%; */
+    /* width: 40px; */  
+    height: 40px; 
     border: none;
     background-color: var(--secondblack);
+    
     color: var(--cream);
     float: right;
-    font-size: 25px;
+    font-size: 29px;
+   
 }
 
 .delete:hover{
@@ -133,4 +143,5 @@ ul li {
 .done-task .done {
     display: none;
 }
+
 
