@@ -118,6 +118,7 @@ ul li {
 
 
 .delete {
+
     /* border-radius: 50%; */
     /* width: 40px; */  
     height: 40px; 
@@ -130,12 +131,33 @@ ul li {
    
 }
 
+
+.edit {
+     
+    height: 40px; 
+    border: none;
+    background-color: var(--secondblack);
+    
+    color: var(--cream);
+    float: right;
+    font-size: 29px;
+   
+}
+
 .delete:hover{
+
     cursor: pointer;
-    color: var(--red);
+    color: var(--hotmag);
+}
+
+.edit:hover{
+
+    cursor: pointer;
+    color: var(--hotmag);
 }
 
 .done-task {
+
     text-decoration: line-through;
     color: var(--grey);
 }
