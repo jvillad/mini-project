@@ -78,6 +78,8 @@ function renderOfTask(tasks) {
         // li setting attribute 'name' = 'value'
         li.setAttribute('data-id', tasks[i].id);
         li.setAttribute('class', tasks[i].status)
+
+        // add task to the list
         li.append(tasks[i].theTask);
 
         // delete task button element for li
@@ -86,6 +88,13 @@ function renderOfTask(tasks) {
         deleteBtn.innerHTML = `<span class="fa-solid fa-trash"></span>`
         // add delete button to li
         li.appendChild(deleteBtn);
+
+        // -- Added Wed 14 Dec
+        // create edit button element
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('edit');
+        editBtn.innerHTML = `<span class="fa-regular fa-pen-to-square"></span>`
+        li.appendChild(editBtn)
 
         // append all li settings to ul
         uList.append(li);
@@ -106,7 +115,18 @@ uList.addEventListener('click', function(ev) {
         const dataId =  ev.target.closest('li').getAttribute('data-id')
         doneTask(dataId);
     }
+
+    if(ev.target.className === 'fa-regular fa-pen-to-square') {
+        const dataId =  ev.target.closest('li').getAttribute('data-id');
+        // console.log(document.querySelector(`[data-id="${dataId}"]`).textContent);
+        const editTask = document.querySelector(`[data-id="${dataId}"]`);
+        editTask.contentEditable = 'true';
+        
+    }
+
 })
+
+
 
 function deleteTask(dataId) {
     tasks = tasks.filter(function(item) {
