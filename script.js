@@ -67,20 +67,36 @@ function renderOfTask(tasks) {
     for (let i = 0; i < tasks.length; i++) {
         // li element for ul
         const li = document.createElement('li');
+
         // done button element for li
         const doneBtn = document.createElement('button');
+
         // adding a class="done" for done button
         doneBtn.classList.add('done');
         doneBtn.innerText = 'Done';
         // add done button to li
         li.appendChild(doneBtn);
 
+        const taskDiv = document.createElement('div');
+        taskDiv.style.marginRight = "auto";
+        taskDiv.setAttribute('id', tasks[i].id)
+        li.appendChild(taskDiv);
+
+        // add task to the list
+        taskDiv.append(tasks[i].theTask);
+
+
         // li setting attribute 'name' = 'value'
         li.setAttribute('data-id', tasks[i].id);
         li.setAttribute('class', tasks[i].status)
 
-        // add task to the list
-        li.append(tasks[i].theTask);
+         // -- Added Wed 14 Dec
+        // create 'edit' button element
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('edit');
+        editBtn.innerHTML = `<span class="fa-regular fa-pen-to-square"></span>`
+        li.appendChild(editBtn)
+       
 
         // delete task button element for li
         const deleteBtn = document.createElement('button');
@@ -89,12 +105,7 @@ function renderOfTask(tasks) {
         // add delete button to li
         li.appendChild(deleteBtn);
 
-        // -- Added Wed 14 Dec
-        // create edit button element
-        const editBtn = document.createElement('button');
-        editBtn.classList.add('edit');
-        editBtn.innerHTML = `<span class="fa-regular fa-pen-to-square"></span>`
-        li.appendChild(editBtn)
+       
 
         // append all li settings to ul
         uList.append(li);
@@ -104,28 +115,39 @@ function renderOfTask(tasks) {
 
 // a handler responsible for the done and delete button
 uList.addEventListener('click', function(ev) {
+
+    // get task id
+    const dataId =  ev.target.closest('li').getAttribute('data-id');
+
     // if delete button is clicked
     if(ev.target.className === 'fa-solid fa-trash') {
-        // get task id
-        const dataId = ev.target.closest('li').getAttribute('data-id');
+        
+        // const dataId = ev.target.closest('li').getAttribute('data-id');
         deleteTask(dataId);
     } 
     // if done button is clicked
     if (ev.target.className === "done") {
-        const dataId =  ev.target.closest('li').getAttribute('data-id')
+        
+        // const dataId =  ev.target.closest('li').getAttribute('data-id')
         doneTask(dataId);
     }
 
     if(ev.target.className === 'fa-regular fa-pen-to-square') {
-        const dataId =  ev.target.closest('li').getAttribute('data-id');
-        // console.log(document.querySelector(`[data-id="${dataId}"]`).textContent);
-        const editTask = document.querySelector(`[data-id="${dataId}"]`);
-        editTask.contentEditable = 'true';
-        
+        editTask(dataId);
     }
 
 })
 
+
+function editTask(dataId) {
+
+    const editTask = document.getElementById(`${dataId}`);
+    editTask.contentEditable = 'true';
+    editTask.borderRadius = '7px';
+    editTask.style.border = '3px solid #ff17e4'
+    editTask.focus();
+
+}
 
 
 function deleteTask(dataId) {
