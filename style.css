@@ -25,6 +25,12 @@ body {
     color: var(--cream);
 }
 
+.save {
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
 h1 {
     padding-top: 150px;
     margin: 0 auto;
@@ -85,6 +91,9 @@ h1 .brand {
 }
 
 ul li {
+
+    display: flex;
+    justify-content: flex-end;
     padding: 20px;
     font-size: 32px;
     list-style-type: none;
@@ -94,11 +103,16 @@ ul li {
     font-size: 20px;
     line-height: 2;
     vertical-align: bottom;
+    max-width: 1200px;
    
 }
 
+li div {
+    width: 650px;
+}
 
 .done {
+
     width: 80px;
     height: 40px;
     border-radius: 30px;
@@ -106,8 +120,7 @@ ul li {
     color: var(--cream);
     font-size: 20px;
     background-color: var(--secondblack);
-    float: left;
-    margin-right: 50px;
+    margin-right: auto;
     
 }
 
@@ -124,9 +137,7 @@ ul li {
     height: 40px; 
     border: none;
     background-color: var(--secondblack);
-    
     color: var(--cream);
-    float: right;
     font-size: 29px;
    
 }
@@ -139,7 +150,6 @@ ul li {
     background-color: var(--secondblack);
     
     color: var(--cream);
-    float: right;
     font-size: 29px;
    
 }
