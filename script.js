@@ -87,7 +87,6 @@ function renderOfTask(tasks) {
         // add task to the list
         taskDiv.append(tasks[i].theTask);
 
-
         // li setting attribute 'name' = 'value'
         li.setAttribute('data-id', tasks[i].id);
         li.setAttribute('class', tasks[i].status)
@@ -99,7 +98,6 @@ function renderOfTask(tasks) {
         editBtn.innerHTML = `<span class="fa-regular fa-pen-to-square"></span>`
         li.appendChild(editBtn)
        
-
         // delete task button element for li
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete');
@@ -149,12 +147,28 @@ uList.addEventListener('click', function(ev) {
         task.contentEditable = false;
         task.borderRadius = '0';
         task.style.border = 'none'
+       
         handleButtonDisplay(task.contentEditable,ev.target.closest('li'));
 
+        updateTask(dataId, task.textContent);
     }
 
 })
 
+function updateTask(dataId, newTask) {
+
+    const updatedTasks = [];
+
+    tasks.forEach(task => {
+        if (String(task.id) === dataId ){
+            task.theTask = newTask;
+        }
+        updatedTasks.push(task);
+    })
+    
+    setToLocalStorage(updatedTasks);
+ 
+}
 
 function editTask(task,taskId) {
 
@@ -170,7 +184,6 @@ function editTask(task,taskId) {
 
 function handleButtonDisplay(editMode,targetBtn) {
 
-   
     const doneBtn =   targetBtn.querySelector('.done');
     const deleteBtn = targetBtn.querySelector('.delete');
     const editBtn = targetBtn.querySelector('.edit');
@@ -182,7 +195,6 @@ function handleButtonDisplay(editMode,targetBtn) {
         deleteBtn.classList.add('hidden');
         editBtn.classList.add('hidden');
         saveBtn.classList.remove('hidden');
-
 
     } else {
 
@@ -217,14 +229,6 @@ function doneTask(dataId) {
     setToLocalStorage(tasks);
 }
 
-function updateTask(dataId) {
-
-    tasks.forEach(object => {
-        if(String(object.id) === dataId) {
-            
-        }
-    });
-}
 
 // helper function to push item to local storage and then re-render task to content
 function setToLocalStorage(tasks) {
