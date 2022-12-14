@@ -5,6 +5,8 @@ const content = document.querySelector('.content');
 // get ul from content class
 const uList = document.querySelector('.content ul');
 const userTask = document.querySelector('input');
+
+
 // function responsible for getting the data from local storage
 function init() {
     const reference = localStorage.getItem('tasks');
@@ -31,7 +33,7 @@ userTask.addEventListener('keypress', (ev) => {
 
 })
 
-addBtn.addEventListener('click',  (ev) => {
+addBtn.addEventListener('click', (ev) => {
 
     ev.preventDefault();
 
@@ -90,7 +92,7 @@ function renderOfTask(tasks) {
         li.setAttribute('data-id', tasks[i].id);
         li.setAttribute('class', tasks[i].status)
 
-         // -- Added Wed 14 Dec
+        // -- Added Wed 14 Dec
         // create 'edit' button element
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit');
@@ -105,8 +107,10 @@ function renderOfTask(tasks) {
         // add delete button to li
         li.appendChild(deleteBtn);
 
-       
-
+        const saveBtn = document.createElement('button');
+        saveBtn.classList.add('save','hidden');
+        saveBtn.innerHTML = `<span class="fa-regular fa-floppy-disk"></span>`
+        li.appendChild(saveBtn);
         // append all li settings to ul
         uList.append(li);
     }
@@ -119,6 +123,10 @@ uList.addEventListener('click', function(ev) {
     // get task id
     const dataId =  ev.target.closest('li').getAttribute('data-id');
 
+    // console.timeLog(ev.target.closest('li'));
+    const task = document.getElementById(`${dataId}`);
+
+    
     // if delete button is clicked
     if(ev.target.className === 'fa-solid fa-trash') {
         
@@ -133,32 +141,71 @@ uList.addEventListener('click', function(ev) {
     }
 
     if(ev.target.className === 'fa-regular fa-pen-to-square') {
-        editTask(dataId);
+
+        editTask(task,dataId,ev.target.closest('li')) ;
+    }
+
+    if(ev.target.className === 'fa-regular fa-floppy-disk') {
+        task.contentEditable = false;
+        task.borderRadius = '0';
+        task.style.border = 'none'
+        handleButtonDisplay(task.contentEditable,ev.target.closest('li'));
+
     }
 
 })
 
 
-function editTask(dataId) {
+function editTask(task,taskId) {
 
-    const editTask = document.getElementById(`${dataId}`);
-    editTask.contentEditable = 'true';
-    editTask.borderRadius = '7px';
-    editTask.style.border = '3px solid #ff17e4'
-    editTask.focus();
+    const targetTask = document.querySelector(`[data-id="${taskId}"]`)
 
+    task.contentEditable = true;
+    task.borderRadius = '7px';
+    task.style.border = '3px solid #ff17e4'
+    task.focus();
+
+    handleButtonDisplay(task.contentEditable, targetTask);   
+}
+
+function handleButtonDisplay(editMode,targetBtn) {
+
+   
+    const doneBtn =   targetBtn.querySelector('.done');
+    const deleteBtn = targetBtn.querySelector('.delete');
+    const editBtn = targetBtn.querySelector('.edit');
+    const saveBtn = targetBtn.querySelector('.save');
+    
+    if (editMode === 'true') {
+
+        doneBtn.classList.add('hidden');
+        deleteBtn.classList.add('hidden');
+        editBtn.classList.add('hidden');
+        saveBtn.classList.remove('hidden');
+
+
+    } else {
+
+        doneBtn.classList.remove('hidden')
+        deleteBtn.classList.remove('hidden');
+        editBtn.classList.remove('hidden');
+        saveBtn.classList.add('hidden');
+    }
+   
 }
 
 
 function deleteTask(dataId) {
+
     tasks = tasks.filter(function(item) {
         return String(item.id) !== dataId;
     });
-    //make a function
+
     setToLocalStorage(tasks);
 }
 
 function doneTask(dataId) {
+
     tasks = tasks.map(object => {
         if (String(object.id) === dataId) {
           
@@ -166,11 +213,22 @@ function doneTask(dataId) {
         }
         return object;
     });
+
     setToLocalStorage(tasks);
+}
+
+function updateTask(dataId) {
+
+    tasks.forEach(object => {
+        if(String(object.id) === dataId) {
+            
+        }
+    });
 }
 
 // helper function to push item to local storage and then re-render task to content
 function setToLocalStorage(tasks) {
+
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderOfTask(tasks);
 }
