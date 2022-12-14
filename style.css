@@ -25,11 +25,6 @@ body {
     color: var(--cream);
 }
 
-.save {
-    display: block;
-    margin: 0 auto;
-    font-size: 18px;
-}
 
 h1 {
     padding-top: 150px;
@@ -50,10 +45,10 @@ h1 .brand {
 }
 
 .input-and-btn{
+
     display: flex;
     justify-content: center;
     gap: 15px;
-    
   
 }
 
@@ -85,9 +80,7 @@ h1 .brand {
 .task-list {
     display: flex;
     flex-direction: column;
-    
     padding: 100px;
-    
 }
 
 ul li {
@@ -108,11 +101,11 @@ ul li {
 }
 
 li div {
+    margin: 0 auto;
     width: 650px;
 }
 
 .done {
-
     width: 80px;
     height: 40px;
     border-radius: 30px;
@@ -121,7 +114,10 @@ li div {
     font-size: 20px;
     background-color: var(--secondblack);
     margin-right: auto;
-    
+}
+
+.done.hidden {
+    display: none;
 }
 
 .done:hover{
@@ -132,26 +128,16 @@ li div {
 
 .delete {
 
-    /* border-radius: 50%; */
-    /* width: 40px; */  
     height: 40px; 
     border: none;
     background-color: var(--secondblack);
     color: var(--cream);
-    font-size: 29px;
+    font-size: 24px;
    
 }
 
-
-.edit {
-     
-    height: 40px; 
-    border: none;
-    background-color: var(--secondblack);
-    
-    color: var(--cream);
-    font-size: 29px;
-   
+.delete.hidden {
+    display: none;
 }
 
 .delete:hover{
@@ -160,8 +146,45 @@ li div {
     color: var(--hotmag);
 }
 
+
+.edit {
+
+    height: 40px; 
+    border: none;
+    background-color: var(--secondblack);
+    color: var(--cream);
+    font-size: 24px;
+   
+}
+
+.edit.hidden {
+    display: none;
+}
+
+
+
 .edit:hover{
 
+    cursor: pointer;
+    color: var(--hotmag);
+}
+
+.save {
+    
+    margin-right: auto;
+    height: 40px; 
+    border: none;
+    background-color: var(--secondblack);
+    color: var(--cream);
+    font-size: 29px;
+}
+
+.save.hidden {
+
+    display: none;
+}
+
+.save:hover {
     cursor: pointer;
     color: var(--hotmag);
 }
